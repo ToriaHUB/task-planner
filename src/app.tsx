@@ -23,6 +23,8 @@ export const LayoutActionsContext = React.createContext<ILayoutActions>({
 
 export const App: React.FC = () => {
   const [progress, setProgress] = useState<IProgress>();
+
+  // When uiIsUpToDate === false wil be rerender
   const [uiIsUpToDate, setUiIsUpToDate] = useState(true);
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export const App: React.FC = () => {
     setProgress(progress);
   }, []);
 
+  //
   useEffect(() => {
     if (!uiIsUpToDate) {
       const storedProgress = readFromLocalStorage<IProgress>(mockProgress.id);
@@ -42,6 +45,7 @@ export const App: React.FC = () => {
     }
   }, [uiIsUpToDate]);
 
+  //
   const layoutActions = useMemo<ILayoutActions>(
     () => ({
       refresh: () => setUiIsUpToDate(false),

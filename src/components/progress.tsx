@@ -17,6 +17,7 @@ type ProgressProps = {
 
 export const Progress: React.FC<ProgressProps> = (props) => {
   const { title, phases } = props;
+  // Запущк тяжелую функцию 1 раз
   const [isCompleted, setIsCompleted] = useState(() =>
     isProgressCompleted(phases)
   );
@@ -29,7 +30,8 @@ export const Progress: React.FC<ProgressProps> = (props) => {
         .get<RandomResource>("https://uselessfacts.jsph.pl/random.json")
         .then((response) => {
           setRandomResource(response.data);
-        });
+        })
+        .catch((error) => console.log(error));
     } else {
       setRandomResource(undefined);
     }

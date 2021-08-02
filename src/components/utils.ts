@@ -14,6 +14,7 @@ export const getFirstIncompletePhaseOrder = (phases: PhaseSamples): number => {
     return firstUncompletedPhase ? firstUncompletedPhase.order : -1;
 };
 
+//
 export const isPhaseDisabled = (
     currentPhaseOrder: number,
     firstIncompletePhaseOrder: number
@@ -25,13 +26,15 @@ export const isPhaseDisabled = (
 export const writeProgressToLocalStorage = (progress: IProgress) =>
     localStorage.setItem(progress.id, JSON.stringify(progress));
 
-export const readFromLocalStorage = <T extends {}>(key: string): T | undefined => {
+// key
+export const readFromLocalStorage = <T>(key: string): T | undefined => {
     const storedValueString = localStorage.getItem(key);
     return storedValueString ? JSON.parse(storedValueString) : undefined;
 };
 
+// prevent multiple initialisation local storage
 export const initLocalStorage = (progress: IProgress) => {
-    if (!localStorage.getItem(progress.id)) {
+     if (!localStorage.getItem(progress.id)) {
         writeProgressToLocalStorage(progress);
-    }
+     }
 };
